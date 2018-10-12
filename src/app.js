@@ -6,3 +6,4 @@ ReactDOM.render(
     <InitiativeApp />,
     document.getElementById('app')
 );
+
