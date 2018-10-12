@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Header = () => (
+const Header = ({title}) => (
     <div>
-        <h1>Roll for Initiative!</h1>
+        <h1>{title}</h1>
     </div>
 );
 

@@ -5,7 +5,7 @@ export default class InitiativeApp extends React.Component {
     render() {
         return (
             <div>
-                <Header />
+                <Header title="Roll for Initiative!"/>
             </div>
         );
     }
