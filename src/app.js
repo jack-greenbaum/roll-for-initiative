@@ -1,5 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Header from './components/Header';
+import InitiativeApp from './components/InitiativeApp';
 
-ReactDOM.render(<Header />, document.getElementById('app'));
+ReactDOM.render(<InitiativeApp />, document.getElementById('app'));
