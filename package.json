@@ -1,0 +1,25 @@
+{
+  "name": "roll-for-initiative",
+  "version": "1.0.0",
+  "description": "Keep track of your next DnD fight!",
+  "main": "index.js",
+  "repository": "https://github.com/jack-greenbaum/roll-for-initiative.git",
+  "author": "jack-greenbaum <grejack@umich.edu>",
+  "license": "MIT",
+  "scripts": {
+    "dev-server": "webpack-dev-server"
+  },
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "7",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "webpack": "^4.20.2",
+    "webpack-dev-server": "^3.1.9"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.1.2"
+  }
+}
