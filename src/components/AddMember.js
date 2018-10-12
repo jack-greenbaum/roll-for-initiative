@@ -1,11 +1,37 @@
 import React from 'react';
 
-const AddMember = (props) => (
-    <form>
-        <input type='text' />
-        <input type='text' />
-        <button>Add Member</button>
-    </form>
-);
+export default class AddMember extends React.Component {
+    state = {
+        error: undefined
+    }
 
-export default AddMember;
+    handleAddMember = (e) => {
+        e.preventDefault();
+
+        const member = {
+            name: e.target.elements.name.value.trim(),
+            bonus: e.target.elements.bonus.value.trim()
+        }
+        const error = this.props.handleAddMember(member);
+
+        this.setState(() => ({error}));
+
+        if (!error) {
+            e.target.elements.name.value = '';
+            e.target.elements.bonus.value = '';
+        }
+    }
+
+    render() {
+        return (
+            <div>
+                {this.state.error && <p>{this.state.error}</p>}
+                <form onSubmit={this.handleAddMember}>
+                    <input type='text' name="name"/>
+                    <input type='text' name="bonus"/>
+                    <button type='submit'>Add Member</button>
+                </form>
+            </div>
+        );
+    }
+};
