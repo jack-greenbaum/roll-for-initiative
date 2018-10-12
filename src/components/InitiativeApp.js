@@ -1,17 +1,19 @@
 import React from 'react';
 import Header from './Header';
-import PartyInputList from './PartyInputList';
+import PartyList from './PartyList';
 
 export default class InitiativeApp extends React.Component {
     state = {
-        party: ['Bartible']
+        party: [{'name': 'Bartible', 'bonus': 2},
+                {'name': 'Cash', 'bonus': 1},
+                {'name': 'Gilfred', 'bonus': 3}]
     }
 
     render() {
         return (
             <div>
                 <Header title="Roll for Initiative!"/>
-                <PartyInputList party={this.state.party}/>
+                <PartyList party={this.state.party}/>
             </div>
         );
     }
