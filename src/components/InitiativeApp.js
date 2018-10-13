@@ -29,6 +29,10 @@ export default class InitiativeApp extends React.Component {
         })}))
     }
 
+    handleDeleteAll = () => {
+        this.setState(() => ({party: []}));
+    }
+
     render() {
         return (
             <div>
@@ -36,6 +40,7 @@ export default class InitiativeApp extends React.Component {
                 <PartyList
                     party={this.state.party}
                     handleDeleteMember={this.handleDeleteMemeber}
+                    handleDeleteAll={this.handleDeleteAll}
                 />
                 <AddMember handleAddMember={this.handleAddMember}/>
             </div>
