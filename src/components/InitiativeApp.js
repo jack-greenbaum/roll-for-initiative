@@ -1,13 +1,15 @@
 import React from 'react';
-import AddMember from './AddMember';
 import Header from './Header';
-import PartyList from './PartyList';
+import PartyListContainer from './PartyListContainer';
 
 export default class InitiativeApp extends React.Component {
     state = {
         party: [{'name': 'Bartible', 'bonus': 2},
                 {'name': 'Cash', 'bonus': 1},
-                {'name': 'Gilfred', 'bonus': 3}]
+                {'name': 'Gilfred', 'bonus': 3}],
+        opponents: [{'name': 'King Bullywog', 'bonus': 4},
+                    {'name': 'Brian', 'bonus': 0},
+                    {'name': 'Kobold Mage', 'bonus': 1}]
     }
 
     handleAddMember = (member) => {
@@ -23,26 +25,57 @@ export default class InitiativeApp extends React.Component {
         this.setState((prevState) => ({party: [...prevState.party, member]}));
     }
 
-    handleDeleteMemeber = (member) => {
+    handleAddOpponent = (member) => {
+        if (!member.name || !member.bonus) {
+            return 'A name and bonus must be entered.'
+        }
+        else if (this.state.party.find((partyMember) => {
+            return partyMember.name === member.name;
+        })){
+            return 'Opponent already exists';
+        }
+
+        this.setState((prevState) => ({opponents: [...prevState.opponents, member]}));
+    }
+
+    handleDeletePartyMember = (member) => {
         this.setState((prevState) => ({party: prevState.party.filter((partyMember) => {
             return partyMember.name !== member.name;
         })}))
     }
 
-    handleDeleteAll = () => {
+    handleDeleteOpponent = (opponent) => {
+        this.setState((prevState) => ({opponents: prevState.opponents.filter((opp) => {
+            return opp.name !== opponent.name;
+        })}))
+    }
+
+    handleDeleteParty = () => {
         this.setState(() => ({party: []}));
+    }
+
+    hanldeDeleteOpponents = () => {
+        this.setState(() => ({opponents: []}));
     }
 
     render() {
         return (
             <div>
                 <Header title="Roll for Initiative!"/>
-                <PartyList
+                <PartyListContainer
                     party={this.state.party}
-                    handleDeleteMember={this.handleDeleteMemeber}
-                    handleDeleteAll={this.handleDeleteAll}
+                    title='Party Members'
+                    handleDelete={this.handleDeletePartyMember}
+                    handleDeleteAll={this.handleDeleteParty}
+                    handleAdd={this.handleAddMember}
                 />
-                <AddMember handleAddMember={this.handleAddMember}/>
+                <PartyListContainer
+                    party={this.state.opponents}
+                    title='Opponents'
+                    handleDelete={this.handleDeleteOpponent}
+                    handleDeleteAll={this.hanldeDeleteOpponents}
+                    handleAdd={this.handleAddOpponent}
+                />
             </div>
         );
     }
