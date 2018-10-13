@@ -23,11 +23,20 @@ export default class InitiativeApp extends React.Component {
         this.setState((prevState) => ({party: [...prevState.party, member]}));
     }
 
+    handleDeleteMemeber = (member) => {
+        this.setState((prevState) => ({party: prevState.party.filter((partyMember) => {
+            return partyMember.name !== member.name;
+        })}))
+    }
+
     render() {
         return (
             <div>
                 <Header title="Roll for Initiative!"/>
-                <PartyList party={this.state.party}/>
+                <PartyList
+                    party={this.state.party}
+                    handleDeleteMember={this.handleDeleteMemeber}
+                />
                 <AddMember handleAddMember={this.handleAddMember}/>
             </div>
         );
