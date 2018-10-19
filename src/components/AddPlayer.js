@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class AddMember extends React.Component {
+export default class AddPlayer extends React.Component {
     state = {
         error: undefined
     }
@@ -8,11 +8,11 @@ export default class AddMember extends React.Component {
     handleAdd = (e) => {
         e.preventDefault();
 
-        const member = {
+        const player = {
             name: e.target.elements.name.value.trim(),
             bonus: e.target.elements.bonus.value.trim()
         }
-        const error = this.props.handleAdd(member);
+        const error = this.props.handleAdd(player);
 
         this.setState(() => ({error}));
 
@@ -29,7 +29,7 @@ export default class AddMember extends React.Component {
                 <form onSubmit={this.handleAdd}>
                     <input type='text' name="name"/>
                     <input type='text' name="bonus"/>
-                    <button type='submit'>Add Member</button>
+                    <button type='submit'>Add Player</button>
                 </form>
             </div>
         );

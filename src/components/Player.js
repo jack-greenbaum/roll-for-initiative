@@ -1,15 +1,15 @@
 import React from 'react';
 
-const PartyMember = ({member, handleDeleteMember}) => (
+const Player = ({player, handleDeletePlayer}) => (
     <div>
-        {member.name} - {member.bonus}
+        {player.name} - {player.bonus}
         <button onClick={(e) => {
             e.preventDefault();
-            handleDeleteMember(member)
+            handleDeletePlayer(player)
         }}>
             Remove
         </button>
     </div>
 );
 
-export default PartyMember;
+export default Player;

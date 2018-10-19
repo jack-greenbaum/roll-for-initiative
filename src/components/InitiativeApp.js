@@ -1,81 +1,51 @@
 import React from 'react';
 import Header from './Header';
-import PartyListContainer from './PartyListContainer';
+import PlayerListContainer from './PlayerListContainer';
+import RandomizeButton from './RandomizeButton';
 
 export default class InitiativeApp extends React.Component {
     state = {
-        party: [{'name': 'Bartible', 'bonus': 2},
+        players: [{'name': 'Bartible', 'bonus': 2},
                 {'name': 'Cash', 'bonus': 1},
                 {'name': 'Gilfred', 'bonus': 3}],
-        opponents: [{'name': 'King Bullywog', 'bonus': 4},
-                    {'name': 'Brian', 'bonus': 0},
-                    {'name': 'Kobold Mage', 'bonus': 1}]
+        battle_order: []
     }
 
-    handleAddMember = (member) => {
-        if (!member.name || !member.bonus) {
+    handleAddPlayer = (newPlayer) => {
+        if (!newPlayer.name || !newPlayer.bonus) {
             return 'A name and bonus must be entered.'
         }
-        else if (this.state.party.find((partyMember) => {
-            return partyMember.name === member.name;
+        else if (this.state.players.find((existingPlayer) => {
+            return existingPlayer.name === newPlayer.name;
         })){
-            return 'Party member already exists';
+            return 'Player already exists';
         }
 
-        this.setState((prevState) => ({party: [...prevState.party, member]}));
+        this.setState((prevState) => ({players: [...prevState.players, newPlayer]}));
     }
 
-    handleAddOpponent = (member) => {
-        if (!member.name || !member.bonus) {
-            return 'A name and bonus must be entered.'
-        }
-        else if (this.state.party.find((partyMember) => {
-            return partyMember.name === member.name;
-        })){
-            return 'Opponent already exists';
-        }
-
-        this.setState((prevState) => ({opponents: [...prevState.opponents, member]}));
-    }
-
-    handleDeletePartyMember = (member) => {
-        this.setState((prevState) => ({party: prevState.party.filter((partyMember) => {
-            return partyMember.name !== member.name;
+    handleDeletePlayer = (playerToDelete) => {
+        this.setState((prevState) => ({players: prevState.players.filter((existingPlayer) => {
+            return existingPlayer.name !== playerToDelete.name;
         })}))
     }
 
-    handleDeleteOpponent = (opponent) => {
-        this.setState((prevState) => ({opponents: prevState.opponents.filter((opp) => {
-            return opp.name !== opponent.name;
-        })}))
-    }
-
-    handleDeleteParty = () => {
-        this.setState(() => ({party: []}));
-    }
-
-    hanldeDeleteOpponents = () => {
-        this.setState(() => ({opponents: []}));
+    handleDeletePlayers = () => {
+        this.setState(() => ({players: []}));
     }
 
     render() {
         return (
             <div>
                 <Header title="Roll for Initiative!"/>
-                <PartyListContainer
-                    party={this.state.party}
-                    title='Party Members'
-                    handleDelete={this.handleDeletePartyMember}
-                    handleDeleteAll={this.handleDeleteParty}
-                    handleAdd={this.handleAddMember}
+                <PlayerListContainer
+                    players={this.state.players}
+                    title='Players'
+                    handleDelete={this.handleDeletePlayer}
+                    handleDeleteAll={this.handleDeletePlayers}
+                    handleAdd={this.handleAddPlayer}
                 />
-                <PartyListContainer
-                    party={this.state.opponents}
-                    title='Opponents'
-                    handleDelete={this.handleDeleteOpponent}
-                    handleDeleteAll={this.hanldeDeleteOpponents}
-                    handleAdd={this.handleAddOpponent}
-                />
+                <RandomizeButton />
             </div>
         );
     }
