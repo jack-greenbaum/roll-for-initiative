@@ -10,7 +10,7 @@ export default class AddPlayer extends React.Component {
 
         const player = {
             name: e.target.elements.name.value.trim(),
-            bonus: e.target.elements.bonus.value.trim()
+            bonus: parseInt(e.target.elements.bonus.value.trim())
         }
         const error = this.props.handleAdd(player);
 
